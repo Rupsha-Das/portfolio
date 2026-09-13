@@ -16,12 +16,12 @@ export type ResumeRecord = {
  */
 export const RESUMES: ResumeRecord[] = [
   {
-    id: "rupsha-das-cv-v1",
+    id: "rupsha-das-cv-v2",
     title: "Rupsha Das — CV",
     fileUrl: "/cv/Rupsha-Das-CV.pdf",
-    version: "v1",
+    version: "v2",
     isActive: true,
-    uploadedAt: "2026-09-05",
+    uploadedAt: "2026-09-13",
   },
 ];
 
