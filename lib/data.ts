@@ -62,23 +62,110 @@ export const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
-export const META_CHIPS = [
-  "FULL-STACK",
-  "AI / ML",
-  "PRODUCT",
-  "EMBEDDED",
-  "CREATIVE TECH",
-  "COMMUNITY",
+export const META_CHIPS = ["FULL-STACK", "AI / ML"];
+
+export type FocusWork = {
+  title: string;
+  org?: string;
+  desc: string;
+};
+
+export type FocusArea = {
+  id: string;
+  word: string;
+  color: string;
+  intro: string[];
+  techLabel: string;
+  tech: string[];
+  work: FocusWork[];
+  visual: "fullstack" | "ai";
+  signal: string;
+  typingLine: string;
+  statuses: string[];
+};
+
+export const FOCUS_AREAS: FocusArea[] = [
+  {
+    id: "fullstack",
+    word: "FULL-STACK",
+    color: "#D7FF3F",
+    intro: [
+      "I build full-stack products from frontend to backend, turning ideas into real, usable experiences.",
+      "At ZedBlox, I worked across both the Admin Console and Customer Console, building features, integrating APIs, improving performance, and handling end-to-end product development.",
+      "From dashboards and management systems to customer-facing applications, I enjoy building products that are functional, scalable, and thoughtfully designed.",
+    ],
+    techLabel: "TECH STACK",
+    tech: ["React", "Next.js", "TypeScript", "Node.js", "Python", "REST APIs", "MongoDB", "SQL"],
+    work: [
+      {
+        title: "Admin Console",
+        org: "ZedBlox",
+        desc: "Built dashboards and management systems — features, API integrations, performance improvements, and end-to-end product development.",
+      },
+      {
+        title: "Customer Console",
+        org: "ZedBlox",
+        desc: "Built customer-facing applications on the same backend — functional, scalable, and thoughtfully designed experiences.",
+      },
+    ],
+    visual: "fullstack",
+    signal: "SIGNAL // FULL-STACK",
+    typingLine: "Admin → API → Customer · live.",
+    statuses: ["ADMIN LIVE", "API ONLINE", "CUSTOMER LIVE"],
+  },
+  {
+    id: "aiml",
+    word: "AI / ML",
+    color: "#7DEEFF",
+    intro: [
+      "I build AI-powered experiences that turn complex information into something people can actually use.",
+      "From document intelligence and conversational analytics to computer vision and intelligent product features, I enjoy working where software meets machine learning.",
+      "I focus on integrating models into real products — connecting AI with useful interfaces, reliable backend systems, and experiences that solve actual problems.",
+    ],
+    techLabel: "WHAT I WORK WITH",
+    tech: [
+      "Python",
+      "Machine Learning",
+      "Computer Vision",
+      "LLM Applications",
+      "AI APIs",
+      "Document Intelligence",
+      "TensorFlow",
+      "YOLO",
+      "MediaPipe",
+    ],
+    work: [
+      {
+        title: "SophistAI",
+        desc: "An AI-powered Personal Syllabus Navigator that transforms a syllabus into an interactive learning experience with knowledge maps, contextual articles, and AI-assisted exploration.",
+      },
+      {
+        title: "Device Analytics AI Assistant",
+        org: "ZedBlox",
+        desc: "Worked on AI assistant concepts for device analytics, including query understanding, device context, conversational analytics, and connecting AI capabilities with product workflows.",
+      },
+      {
+        title: "Embedded ML",
+        desc: "Worked with computer vision and on-device machine learning concepts using YOLOv5n, ESP32-S3, Raspberry Pi, and sensor-based systems.",
+      },
+    ],
+    visual: "ai",
+    signal: "SIGNAL // AI / ML",
+    typingLine: "Turning information into intelligence.",
+    statuses: ["MODEL READY", "INFERENCE ACTIVE", "DATA PROCESSED"],
+  },
 ];
 
-export const DIMENSIONS = [
-  { word: "FULL-STACK", color: "#D7FF3F", blurb: "React · Next.js · Node · TypeScript — IoT consoles serving 1,000+ devices in production.", visual: "code" },
-  { word: "AI / ML", color: "#8B5CFF", blurb: "LLM assistants, telemetry diagnostics, YOLOv5n at the edge. Curious, not hype-drunk.", visual: "ai" },
-  { word: "PRODUCT", color: "#F5F3EE", blurb: "Analytics dashboards, RBAC, OTA workflows, exports — the unsexy work that ships.", visual: "product" },
-  { word: "EMBEDDED", color: "#7DEEFF", blurb: "ESP32-S3 · sensors · motor control · firmware under strict memory constraints.", visual: "hardware" },
-  { word: "COMMUNITY", color: "#FF5C8A", blurb: "Hack4Bengal evangelist. Outreach, stages, rooms full of builders.", visual: "community" },
-  { word: "CONTENT", color: "#D7FF3F", blurb: "Millions of views. I know why people stop scrolling.", visual: "content" },
-] as const;
+/** Kept for backwards-compat; WhoAmI now uses FOCUS_AREAS (FULL-STACK + AI/ML only). */
+export const DIMENSIONS = FOCUS_AREAS.map((f) => ({
+  word: f.word,
+  color: f.color,
+  blurb: f.intro[0],
+  visual: f.visual,
+})) as unknown as readonly [
+  { word: string; color: string; blurb: string; visual: string },
+  { word: string; color: string; blurb: string; visual: string },
+];
 
 export const EXPERIENCE = [
   {
