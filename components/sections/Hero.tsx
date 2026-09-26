@@ -74,13 +74,13 @@ export default function Hero() {
       ref={ref}
       onMouseMove={onMouse}
       aria-label="Introduction"
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-5 pb-10 pt-28 md:px-12 md:pb-14 blueprint-grid"
+      className="relative flex min-h-[100svh] flex-col justify-center md:justify-end overflow-hidden px-5 pb-8 pt-28 md:px-12 md:pb-14 md:pt-28 blueprint-grid"
     >
       {/* faint giant backdrop wordmark, scroll-reactive */}
-      <motion.div style={{ y: bgY, opacity: fade }} aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center">
+      <motion.div style={{ y: bgY, opacity: fade }} aria-hidden className="pointer-events-none absolute inset-0 flex items-start justify-center pt-[15vh] md:items-center md:pt-0">
         <motion.span
           style={{ x: bgX }}
-          className="font-display font-bold leading-none tracking-tighter text-transparent text-stroke opacity-[0.16] select-none text-[22vw]"
+          className="font-display font-bold leading-none tracking-tighter text-transparent text-stroke opacity-[0.32] md:opacity-[0.16] select-none whitespace-nowrap text-[30vw] sm:text-[26vw] md:text-[22vw]"
         >
           RUPSHA
         </motion.span>
@@ -91,7 +91,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
-        className="absolute left-5 md:left-12 top-24 flex items-center gap-3"
+        className="absolute left-5 md:left-12 top-[88px] md:top-24 flex items-center gap-3"
       >
         <span className="relative flex h-2.5 w-2.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime opacity-60" />
@@ -111,7 +111,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="absolute right-5 md:right-12 top-24 hidden sm:block font-mono text-[11px] tracking-[0.25em] text-muted"
+        className="absolute right-5 md:right-12 top-[88px] md:top-24 hidden sm:block font-mono text-[11px] tracking-[0.25em] text-muted"
       >
         KOLKATA → HYDERABAD → INTERNET
       </motion.p>
@@ -121,20 +121,20 @@ export default function Hero() {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 0.55, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute left-0 right-0 top-[132px] md:top-[136px] h-px origin-left bg-gradient-to-r from-lime via-violet to-transparent"
+        className="absolute left-0 right-0 top-[120px] md:top-[136px] h-px origin-left bg-gradient-to-r from-lime via-violet to-transparent"
         aria-hidden
       />
 
-      <div className="relative z-10">
+      <div className="relative z-10 w-full pt-8 md:pt-0">
         {/* multidimensional identity chips */}
-        <div className="mb-6 flex flex-wrap gap-2 md:gap-3" aria-label="Areas of work">
+        <div className="mb-4 md:mb-6 flex flex-wrap gap-2 md:gap-3" aria-label="Areas of work">
           {META_CHIPS.map((chip, i) => (
             <Chip key={chip} chip={chip} i={i} sx={sx} sy={sy} />
           ))}
         </div>
 
         <h1 className="font-display font-bold leading-[0.88] tracking-tighter">
-          <span className="block text-[13.5vw] md:text-[9.5vw]">
+          <span className="block whitespace-nowrap text-[14.8vw] sm:text-[13.5vw] md:text-[9.5vw]">
             <CharReveal text="RUPSHA DAS" delay={0.7} />
           </span>
         </h1>
@@ -143,9 +143,9 @@ export default function Hero() {
           initial={{ clipPath: "inset(0 100% 0 0)" }}
           animate={{ clipPath: "inset(0 0% 0 0)" }}
           transition={{ delay: 1.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-4 inline-block -rotate-1 bg-violet px-4 py-2 md:px-6 md:py-3"
+          className="mt-3 md:mt-4 inline-block -rotate-1 bg-violet px-4 py-2 md:px-6 md:py-3"
         >
-          <p className="font-display text-lg md:text-3xl font-bold tracking-tight text-white">
+          <p className="font-display text-base sm:text-lg md:text-3xl font-bold tracking-tight text-white">
             FULL-STACK DEVELOPER
           </p>
         </motion.div>
@@ -154,17 +154,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.7, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-6 max-w-2xl font-display text-xl md:text-3xl font-medium leading-snug"
+          className="mt-4 md:mt-6 max-w-2xl font-display text-lg sm:text-xl md:text-3xl font-medium leading-snug"
         >
           “{PROFILE.tagline}”
         </motion.p>
 
-        <div className="mt-6 grid gap-8 md:grid-cols-12 md:items-end">
+        <div className="mt-4 md:mt-6 grid gap-5 md:gap-8 md:grid-cols-12 md:items-end">
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-xl text-base md:text-lg leading-relaxed text-ink/75 md:col-span-6"
+            className="max-w-xl text-[15px] sm:text-base md:text-lg leading-relaxed text-ink/75 md:col-span-6"
           >
             {PROFILE.supporting}
           </motion.p>
@@ -196,7 +196,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.3 }}
-          className="mt-10 flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[10px] md:text-[11px] tracking-[0.25em] text-muted"
+          className="mt-6 md:mt-10 flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[10px] md:text-[11px] tracking-[0.25em] text-muted"
         >
           <span>SCROLL FOR THE CHAOS ↓</span>
           <span className="hidden sm:inline">60FPS · NO TEMPLATES · EST. CURIOSITY</span>
