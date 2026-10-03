@@ -37,6 +37,11 @@ export default function Achievements() {
               <p className="mt-4 font-display text-5xl md:text-6xl font-bold tracking-tighter">
                 {a.isMillions ? (
                   <span>2M+</span>
+                ) : a.value <= 9 ? (
+                  <span>
+                    {a.value}
+                    {a.suffix}
+                  </span>
                 ) : (
                   <Counter to={a.value} suffix={a.suffix} />
                 )}

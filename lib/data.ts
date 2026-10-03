@@ -213,7 +213,7 @@ export type Project = {
   stats: { value: string; label: string }[];
   description: string;
   tags: string[];
-  links: { demo?: string; github: string };
+  links: { demo?: string; github?: string };
   accent: string;
 };
 
@@ -222,48 +222,48 @@ export const PROJECTS: Project[] = [
     id: "sophistai",
     index: "01",
     title: "SophistAI",
-    subtitle: "Personal Syllabus Navigator · sophistai.app",
+    subtitle: "AI Syllabus Navigator · sophistai.app",
     hook: "Turning a static syllabus into an interactive learning universe.",
     stats: [
-      { value: "1ST / 200+", label: "Diversion 2k25 teams" },
-      { value: "500+", label: "users" },
+      { value: "AI MAP", label: "interactive knowledge graph" },
+      { value: "LIVE", label: "real users exploring" },
     ],
     description:
-      "LLM-powered learning platform that processes syllabus PDFs into structured knowledge maps, topic hierarchies, prerequisite relationships and personalized learning paths — document understanding + retrieval workflows, NLP and prompt engineering.",
-    tags: ["Next.js", "React", "TypeScript", "LLMs", "PDF processing", "Knowledge Graph"],
-    links: { demo: "https://sophistai.app", github: "https://github.com/Rupsha-Das" },
+      "SophistAI is an AI-powered personal syllabus navigator that transforms a syllabus into an interactive knowledge map and helps users explore topics, track learning progress, and dive deeper into concepts.",
+    tags: ["Next.js", "React", "AI/ML", "Interactive Learning"],
+    links: { demo: "https://sophistai.app/" },
     accent: "#D7FF3F",
   },
   {
-    id: "manimate",
+    id: "veda-assessment",
     index: "02",
-    title: "Manimate",
-    subtitle: "Agentic AI Education Platform",
-    hook: "Topics in, narrated Manim videos out — agents all the way down.",
+    title: "Veda Assessment",
+    subtitle: "Assessment Platform · Web Application",
+    hook: "Clean, interactive assessments — built for focus and flow.",
     stats: [
-      { value: "AGENTIC", label: "lesson → video pipeline" },
-      { value: "TTS+FX", label: "Kokoro · FFmpeg · quizzes" },
+      { value: "SMOOTH", label: "interactive assessment flow" },
+      { value: "CLEAN", label: "modern responsive UI" },
     ],
     description:
-      "Next.js agentic AI platform transforming academic topics into structured lessons, narrated explanations and high-fidelity Manim videos — web research, multi-provider LLM generation, traceback-aware self-correction, Manim rendering, Kokoro TTS, FFmpeg stitching and AI quizzes.",
-    tags: ["Next.js", "LLMs", "Manim", "Python", "FFmpeg", "Agentic AI"],
-    links: { github: "https://github.com/Rupsha-Das/manimate" },
+      "Veda Assessment is a web-based assessment platform with a clean, interactive interface for conducting and managing assessments.",
+    tags: ["React", "JavaScript", "Web Application"],
+    links: { demo: "https://veda-assessment.vercel.app/" },
     accent: "#8B5CFF",
   },
   {
-    id: "edusphere",
+    id: "anime-project",
     index: "03",
-    title: "EduSphere",
-    subtitle: "Learning Platform",
-    hook: "A full learning universe — playlists to leaderboards.",
+    title: "Anime",
+    subtitle: "Anime Music Experience · Interactive Themes",
+    hook: "An immersive anime music experience where users can listen to anime songs and switch between atmospheric backgrounds and visual vibes.",
     stats: [
-      { value: "9+", label: "routes & flows" },
-      { value: "R19+N16", label: "React 19 · Next.js 16" },
+      { value: "MUSIC", label: "play · pause · skip" },
+      { value: "VIBES", label: "dynamic backgrounds" },
     ],
     description:
-      "Polished learning-platform frontend — landing, playlist discovery, learner dashboard, video player, quiz flow, leaderboard, profile, progress tracking and an animated AI assistant, built on a reusable glassmorphism UI system.",
-    tags: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Radix UI", "Framer Motion"],
-    links: { github: "https://github.com/Rupsha-Das/Edusphere" },
+      "Anime is an immersive anime-themed music experience for listening to anime songs directly on the site with play, pause, skip and music controls, plus switchable atmospheric backgrounds and visual themes — an interactive anime-inspired UI, not just a basic player.",
+    tags: ["React", "Music Player", "Anime UI", "Interactive Themes", "Dynamic Backgrounds"],
+    links: { demo: "https://anime-delta-ecru.vercel.app/" },
     accent: "#7DEEFF",
   },
 ];
