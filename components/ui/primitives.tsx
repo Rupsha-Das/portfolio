@@ -68,7 +68,7 @@ export function SectionHeading({
         />
         <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted">{eyebrow}</span>
       </div>
-      <div className="font-display text-4xl md:text-6xl font-bold leading-[0.95] tracking-tight">{title}</div>
+      <h2 className="font-display text-4xl md:text-6xl font-bold leading-[0.95] tracking-tight">{title}</h2>
     </div>
   );
 }

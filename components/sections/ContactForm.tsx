@@ -117,7 +117,7 @@ export default function ContactForm() {
 
               <div>
                 <MagneticButton cursor="SEND →" className="bg-lime text-black border border-lime">
-                  <button type="submit" disabled={status === "sending"} className="inline-flex items-center gap-2 disabled:opacity-60" aria-label="Send message">
+                  <button type="submit" disabled={status === "sending"} className="inline-flex items-center gap-2 disabled:opacity-60">
                     {status === "sending" ? (
                       <><Loader2 size={16} className="animate-spin" /> SENDING…</>
                     ) : (

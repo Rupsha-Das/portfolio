@@ -1,8 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/ui/CustomCursor";
 import Navigation from "@/components/layout/Navigation";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  SITE_DESCRIPTION,
+  SITE_LOCALE,
+  SITE_NAME,
+  SITE_OG_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site";
 
 const display = Space_Grotesk({
   variable: "--font-display",
@@ -18,30 +27,63 @@ const body = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Rupsha Das — Full-Stack Developer & Builder",
-  description:
-    "Rupsha Das is a full-stack developer and builder working across web, AI/ML, embedded systems, and creative technology.",
-  keywords: ["Rupsha Das", "Full-Stack Developer", "Next.js", "React", "AI", "Embedded Systems", "Portfolio"],
-  authors: [{ name: "Rupsha Das" }],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: ["Rupsha Das", "Full-Stack Developer", "Next.js", "React", "Node.js", "TypeScript", "AI", "Portfolio"],
+  authors: [{ name: "Rupsha Das", url: SITE_URL }],
   creator: "Rupsha Das",
-  metadataBase: new URL("https://rupshadas.dev"),
+  publisher: "Rupsha Das",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Rupsha Das — Full-Stack Developer & Builder",
-    description:
-      "I build products, break things, ship ideas — and occasionally make the internet pay attention.",
+    title: SITE_TITLE,
+    description: SITE_OG_DESCRIPTION,
+    url: "/",
     type: "website",
-    locale: "en_US",
-    siteName: "Rupsha Das",
+    locale: SITE_LOCALE,
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Rupsha Das — Full-Stack Developer. React · Next.js · Node.js · AI.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rupsha Das — Full-Stack Developer & Builder",
-    description:
-      "Full-stack developer working across web, AI/ML, embedded systems, and creative technology.",
+    title: SITE_TITLE,
+    description: SITE_OG_DESCRIPTION,
+    images: ["/opengraph-image"],
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon.ico", sizes: "any" }],
+    apple: [{ url: "/apple-icon", sizes: "180x180", type: "image/png" }],
   },
+  manifest: "/manifest.webmanifest",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#08090d",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -59,6 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main" className="flex-1 flex flex-col">
           {children}
         </main>
+        <JsonLd />
       </body>
     </html>
   );
