@@ -6,7 +6,8 @@ import { ExperienceList } from "@/components/studio/ExperienceList";
 import { SkillsGrid } from "@/components/studio/SkillsGrid";
 import { ProofAndReferences } from "@/components/studio/ProofAndReferences";
 import { ContactForm } from "@/components/studio/ContactForm";
-import { PortraitCard } from "@/components/studio/PortraitCard";
+import { ArtGallery } from "@/components/studio/ArtGallery";
+import { SongSpot } from "@/components/studio/SongSpot";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ABOUT, PROFILE } from "@/lib/content";
@@ -36,7 +37,7 @@ export default function Home() {
         />
         <div className="grid gap-8 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
-            <PortraitCard />
+            <ArtGallery compact />
           </Reveal>
           <div className="lg:col-span-8">
             <Reveal delay={80}>
@@ -70,9 +71,13 @@ export default function Home() {
 
       <ProofAndReferences />
 
+      <ArtGallery />
+
+      <SongSpot />
+
       <section aria-label="Contact preview" className="wrap pb-4 pt-4">
         <SectionHeading
-          index="06"
+          index="08"
           eyebrow="Last call"
           title={
             <>

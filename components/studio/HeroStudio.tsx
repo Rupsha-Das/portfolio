@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowDown, ArrowUpRight, FileText, MapPin } from "lucide-react";
 import { PROFILE, SOCIAL_LINKS } from "@/lib/content";
 import { LivingPortrait } from "@/components/studio/LivingPortrait";
+import { BoredMenu } from "@/components/studio/BoredMenu";
 import { Reveal } from "@/components/ui/Reveal";
 import { useActiveResume } from "@/components/ui/UseActiveResume";
 
@@ -67,6 +68,7 @@ export function HeroStudio() {
             >
               <FileText size={17} aria-hidden /> Resume
             </a>
+            <BoredMenu />
           </div>
         </Reveal>
         <Reveal delay={260}>

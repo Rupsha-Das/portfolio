@@ -1,18 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
-import Image from "next/image";
+import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 /**
- * Editorial portrait. Uses the real uploaded photograph at `/profile.jpg`
- * (drop the file into `public/` — no code changes needed).
- * If the photo isn't there yet, renders a tasteful monogram placeholder —
- * never an AI-generated substitute person.
+ * Editorial monogram card (legacy, currently unmounted).
+ * Previously rendered the real photograph at `/profile.jpg`; the photo
+ * was intentionally removed and this now renders only the monogram
+ * placeholder. The live site uses `LivingPortrait` + `ArtGallery` instead.
  */
 export default function Portrait() {
   const ref = useRef<HTMLDivElement>(null);
-  const [missing, setMissing] = useState(false);
   const rx = useMotionValue(0.5);
   const ry = useMotionValue(0.5);
   const srx = useSpring(rx, { stiffness: 120, damping: 18 });
@@ -41,31 +39,17 @@ export default function Portrait() {
       whileInView={{ opacity: 1, y: 0, rotate: 2 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ type: "spring", stiffness: 120, damping: 18 }}
-      data-cursor={missing ? undefined : "THAT'S ME :)"}
+      data-cursor="MONOGRAM"
       className="relative overflow-hidden rounded-2xl border border-white/10 bg-surface"
       style={{ perspective: 1000 }}
     >
       <motion.div style={{ rotateX, rotateY, transformStyle: "preserve-3d" }} className="relative aspect-[4/5]">
-        {!missing ? (
-          <Image
-            src="/profile.jpg"
-            alt="Portrait of Rupsha Das"
-            fill
-            sizes="(max-width: 768px) 100vw, 400px"
-            className="object-cover"
-            onError={() => setMissing(true)}
-            priority={false}
-          />
-        ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-violet/40 via-surface to-void p-8 text-center">
-            <p className="font-display text-7xl font-bold tracking-tighter text-lime">R.</p>
-            <p className="font-mono text-[11px] tracking-[0.25em] text-muted">
-              PHOTO LANDS HERE
-              <br />
-              DROP IT AT /profile.jpg
-            </p>
-          </div>
-        )}
+        <div className="flex h-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-violet/40 via-surface to-void p-8 text-center">
+          <p className="font-display text-7xl font-bold tracking-tighter text-lime">R.</p>
+          <p className="font-mono text-[11px] tracking-[0.25em] text-muted">
+            THE BUILDER, UNFILTERED
+          </p>
+        </div>
         {/* grain sweep + glare on hover */}
         <motion.div
           aria-hidden

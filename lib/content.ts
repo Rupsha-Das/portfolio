@@ -476,3 +476,27 @@ export const ABOUT = {
 export function getProject(slug: string): Project | undefined {
   return PROJECTS.find((p) => p.slug === slug);
 }
+
+/* ---------------- studio playbox ---------------- */
+
+/**
+ * Favorite song. No audio is bundled or redistributed: `audioUrl` stays
+ * empty until a licensed file is provided, and the player gracefully
+ * falls back to clearly-labeled official external links.
+ */
+export const SONG = {
+  title: "Suzume",
+  artist: "RADWIMPS feat. Toaka",
+  note: "My debugging loop song — start it when a bug looks impossible, and it usually surrenders by the second chorus.",
+  audioUrl: "",
+  links: [
+    { label: "YouTube", href: "https://www.youtube.com/results?search_query=RADWIMPS+Toaka+Suzume+official" },
+    { label: "Spotify", href: "https://open.spotify.com/search/RADWIMPS%20Toaka%20Suzume" },
+  ],
+} as const;
+
+/** Short personal note for the "Bored? Try something." menu. */
+export const PERSONAL_NOTE = {
+  title: "A note, taped to the monitor",
+  body: "Most of this site was built between midnight and 2am, fueled by chai and an unreasonable love for tiny details. If something delights you here, tell me — that's the whole point of a personal studio.",
+} as const;

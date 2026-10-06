@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { PROFILE, SOCIAL_LINKS } from "@/lib/content";
+import { DeskScene } from "@/components/studio/DeskScene";
 
 const CLOSERS = [
   "Set in Fraunces & Inter, on warm paper.",
@@ -86,6 +87,9 @@ export function SiteFooter() {
               </li>
             </ul>
           </div>
+        </div>
+        <div id="desk" className="scroll-mt-24">
+          <DeskScene />
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="t-small text-inksoft">© 2026 Rupsha Das · Kolkata → Hyderabad → Internet</p>

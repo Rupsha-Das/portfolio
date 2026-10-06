@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ABOUT } from "@/lib/content";
-import { PortraitCard } from "@/components/studio/PortraitCard";
+import { ArtGallery } from "@/components/studio/ArtGallery";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function AboutPage() {
       <div className="mt-10 grid gap-8 lg:grid-cols-12">
         <Reveal className="lg:col-span-4">
           <div className="lg:sticky lg:top-24">
-            <PortraitCard />
+            <ArtGallery compact />
           </div>
         </Reveal>
         <div className="grid gap-10 lg:col-span-8">
