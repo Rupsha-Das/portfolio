@@ -1,13 +1,13 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Rupsha Das — Full-Stack Developer. React · Next.js · Node.js · AI.";
+export const alt = "Rupsha Das — Full-Stack Developer. Reliable software people enjoy using.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
- * Homepage Open Graph image. Matches the portfolio visual language:
- * dark void background, lime/violet glows, editorial typography.
- * Statically generated at build time — no extra dependencies.
+ * Homepage Open Graph image. Matches the studio-ledger identity:
+ * warm paper, ink typography, clay accent. Statically generated
+ * at build time — no extra dependencies.
  */
 export default function Image() {
   return new ImageResponse(
@@ -18,43 +18,40 @@ export default function Image() {
           height: "630px",
           display: "flex",
           position: "relative",
-          background: "#08090d",
+          background: "#faf6ed",
           overflow: "hidden",
-          fontFamily: "sans-serif",
+          fontFamily: "serif",
         }}
       >
-        {/* glow accents */}
+        {/* ledger rule + margin line */}
         <div
           style={{
             position: "absolute",
-            left: "-120px",
-            top: "-120px",
-            width: "480px",
-            height: "480px",
-            borderRadius: "9999px",
-            background: "rgba(215,255,63,0.16)",
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            display: "flex",
+            border: "24px solid #faf6ed",
           }}
-        />
+        >
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              border: "2px solid rgba(29,25,18,0.5)",
+              borderRadius: "24px",
+            }}
+          />
+        </div>
         <div
           style={{
             position: "absolute",
-            right: "-140px",
-            bottom: "-160px",
-            width: "560px",
-            height: "560px",
-            borderRadius: "9999px",
-            background: "rgba(139,92,255,0.22)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            right: "120px",
-            top: "-80px",
-            width: "300px",
-            height: "300px",
-            borderRadius: "9999px",
-            background: "rgba(125,238,255,0.10)",
+            left: "96px",
+            top: 0,
+            bottom: 0,
+            width: "2px",
+            background: "rgba(182,70,28,0.35)",
           }}
         />
 
@@ -64,7 +61,7 @@ export default function Image() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            padding: "80px",
+            padding: "80px 80px 80px 140px",
             width: "100%",
           }}
         >
@@ -74,65 +71,47 @@ export default function Image() {
               alignItems: "center",
               fontSize: 26,
               letterSpacing: 6,
-              color: "#d7ff3f",
+              color: "#57503f",
+              fontFamily: "monospace",
             }}
           >
-            RUPSHA DAS · PORTFOLIO
+            RUPSHA DAS · STUDIO
           </div>
           <div
             style={{
               display: "flex",
-              fontSize: 130,
-              fontWeight: 800,
+              fontSize: 150,
+              fontWeight: 900,
               letterSpacing: -4,
-              color: "#f5f3ee",
+              color: "#1d1912",
               lineHeight: 1,
-              marginTop: 12,
+              marginTop: 8,
             }}
           >
-            RUPSHA.
+            Rupsha.
           </div>
           <div
             style={{
               display: "flex",
-              marginTop: 16,
+              fontSize: 44,
+              fontStyle: "italic",
+              color: "#b6461c",
+              marginTop: 8,
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                background: "#8b5cff",
-                color: "#ffffff",
-                fontSize: 40,
-                fontWeight: 700,
-                letterSpacing: 2,
-                padding: "12px 28px",
-              }}
-            >
-              FULL-STACK DEVELOPER
-            </div>
+            Reliable software, honestly built.
           </div>
           <div
             style={{
               display: "flex",
-              fontSize: 32,
-              color: "rgba(245,243,238,0.75)",
-              letterSpacing: 1,
-              marginTop: 24,
-            }}
-          >
-            React · Next.js · Node.js · AI
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: 24,
-              color: "rgba(245,243,238,0.45)",
+              fontSize: 26,
+              color: "rgba(29,25,18,0.6)",
               letterSpacing: 2,
               marginTop: 28,
+              fontFamily: "monospace",
             }}
           >
-            rupshadas.dev
+            FULL-STACK · AI · EMBEDDED
           </div>
         </div>
       </div>

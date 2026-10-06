@@ -1,131 +1,626 @@
 @import "tailwindcss";
 
-@theme {
-  --color-void: #08090d;
-  --color-surface: #11131a;
-  --color-surface2: #181b24;
-  --color-ink: #f5f3ee;
-  --color-muted: #9a9ba3;
-  --color-lime: #d7ff3f;
-  --color-violet: #8b5cff;
-  --color-coral: #ff5c8a;
-  --color-cyan: #7deeff;
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper2: var(--paper-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-inksoft: var(--ink-soft);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-moss: var(--moss);
+  --color-clay: var(--clay);
+  --color-ochre: var(--ochre);
+  --color-skye: var(--skye);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono2);
 }
 
+/* ---------- light-first paper studio ---------- */
 :root {
-  --lime: #d7ff3f;
-  --violet: #8b5cff;
-  --coral: #ff5c8a;
-  --cyan: #7deeff;
+  --paper: #faf6ed;
+  --paper-2: #f1e9d6;
+  --card: #fffdf7;
+  --ink: #1d1912;
+  --ink-soft: #57503f;
+  --faint: #8a8172;
+  --line: rgba(29, 25, 18, 0.16);
+  --line-strong: rgba(29, 25, 18, 0.34);
+  --moss: #2f4a3a;
+  --moss-ink: #eef3e8;
+  --clay: #b6461c;
+  --ochre: #d9a441;
+  --skye: #3d6b8e;
+  --wash: rgba(47, 74, 58, 0.08);
+  --shadow: 0 1px 0 rgba(29, 25, 18, 0.06), 0 12px 32px -18px rgba(29, 25, 18, 0.35);
+  --grain-opacity: 0.05;
+  color-scheme: light;
 }
 
+[data-theme="dark"] {
+  --paper: #14110c;
+  --paper-2: #1c1812;
+  --card: #1e1a14;
+  --ink: #f2ecdd;
+  --ink-soft: #c9c0ab;
+  --faint: #97907e;
+  --line: rgba(242, 236, 221, 0.16);
+  --line-strong: rgba(242, 236, 221, 0.36);
+  --moss: #9db89a;
+  --moss-ink: #141a13;
+  --clay: #e8703a;
+  --ochre: #e3b45c;
+  --skye: #8fb8d8;
+  --wash: rgba(157, 184, 154, 0.1);
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 18px 44px -20px rgba(0, 0, 0, 0.7);
+  --grain-opacity: 0.07;
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-html, body {
-  background: #08090d;
-  color: #f5f3ee;
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
   overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  line-height: 1.6;
 }
 
 ::selection {
-  background: #d7ff3f;
-  color: #08090d;
+  background: var(--ochre);
+  color: #1d1912;
 }
 
-/* Custom cursor: hide native only on precise pointers */
-@media (pointer: fine) {
-  .custom-cursor-active,
-  .custom-cursor-active a,
-  .custom-cursor-active button,
-  .custom-cursor-active [data-cursor] {
-    cursor: none !important;
+/* paper grain — tactile, static (no animation) */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* faint ruled ledger lines on hero only */
+.ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    var(--line) 31px,
+    var(--line) 32px
+  );
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--clay);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ---------- type scale (fluid, clamp-driven) ---------- */
+/* Mobile-first: minimums tuned so "Rupsha" fits at 320px and the name
+   wraps naturally instead of forcing a cramped single line. */
+.t-hero {
+  font-size: clamp(2.55rem, 10vw + 0.75rem, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.t-h1 {
+  font-size: clamp(2.1rem, 4.5vw + 1rem, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+.t-h2 {
+  font-size: clamp(1.6rem, 2.6vw + 0.9rem, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+.t-lede {
+  font-size: clamp(1.05rem, 1.2vw + 0.9rem, 1.35rem);
+  line-height: 1.55;
+}
+.t-small {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+.t-micro {
+  font-family: var(--font-mono2);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* hand-drawn-feeling underline for key phrases */
+.scribble {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 20 3, 40 10, 60 6 S 100 4, 118 7' fill='none' stroke='%23b6461c' stroke-width='3' stroke-linecap='round' opacity='0.85'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.32em;
+  padding-bottom: 0.08em;
+}
+[data-theme="dark"] .scribble {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 20 3, 40 10, 60 6 S 100 4, 118 7' fill='none' stroke='%23e8703a' stroke-width='3' stroke-linecap='round' opacity='0.9'/%3E%3C/svg%3E");
+}
+
+/* circled annotation */
+.circled {
+  position: relative;
+  white-space: nowrap;
+}
+.circled > svg {
+  position: absolute;
+  inset: -18% -8%;
+  width: 116%;
+  height: 136%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* ---------- layout helpers ---------- */
+.wrap {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 4vw, 2.5rem);
+}
+.wrap-wide {
+  max-width: 92rem;
+}
+
+.rule-double {
+  border-top: 1px solid var(--line);
+  box-shadow: 0 4px 0 -3px var(--paper), 0 5px 0 -4px var(--line);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 1.1rem;
+  box-shadow: var(--shadow);
+}
+
+/* comfortably tappable by default.
+   Wrapped in @layer components so Tailwind utilities like `hidden`,
+   `md:inline-flex`, and `lg:inline-flex` (utilities layer) correctly
+   override these display values on mobile. Unlayered author CSS beats
+   layered utilities, which previously forced desktop-only header items
+   (`.btn.hidden`, `.tag.hidden`) visible on phones and pushed the
+   header ~60px past the viewport. */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    max-width: 100%;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 650;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    text-align: center;
+    border: 1.5px solid var(--line-strong);
+    transition: transform 160ms ease, background-color 160ms ease, color 160ms ease,
+      border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.99);
+  }
+  .btn-solid {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .btn-solid:hover {
+    background: var(--clay);
+    border-color: var(--clay);
+    color: #fff8ee;
+  }
+  .btn-ghost:hover {
+    border-color: var(--ink);
+    background: var(--wash);
+  }
+  .btn-moss {
+    background: var(--moss);
+    border-color: var(--moss);
+    color: var(--moss-ink);
+  }
+  .btn-moss:hover {
+    filter: brightness(1.1);
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.28rem 0.75rem;
+    font-family: var(--font-mono2);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    background: color-mix(in srgb, var(--card) 70%, transparent);
+    max-width: 100%;
   }
 }
 
-@media (pointer: coarse) {
-  .custom-cursor-el { display: none !important; }
+/* Hero CTA row — wraps on mobile, stacks full-width below 380px. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  max-width: 100%;
+}
+@media (max-width: 380px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions > * {
+    width: 100%;
+  }
 }
 
-/* thin scrollbars */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #08090d; }
-::-webkit-scrollbar-thumb { background: #23262f; border-radius: 8px; border: 2px solid #08090d; }
-::-webkit-scrollbar-thumb:hover { background: #8b5cff; }
-
-/* film-grain noise */
-.noise::after {
-  content: "";
-  position: fixed;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
-  pointer-events: none;
-  z-index: 90;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain 8s steps(10) infinite;
+/* ---------- reveal on scroll (JS adds .is-in; no-JS shows content) ---------- */
+.reveal {
+  opacity: 0;
+  translate: 0 18px;
+  transition: opacity 560ms ease, translate 560ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
-@keyframes grain {
-  0%,100% { transform: translate(0,0); }
-  10% { transform: translate(-2%,-3%); }
-  30% { transform: translate(3%,-2%); }
-  50% { transform: translate(-3%,2%); }
-  70% { transform: translate(2%,3%); }
-  90% { transform: translate(-1%,1%); }
+.reveal.is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+html.no-js .reveal {
+  opacity: 1;
+  translate: none;
 }
 
-.blueprint-grid {
-  background-image:
-    linear-gradient(to right, rgba(245,243,238,0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(245,243,238,0.045) 1px, transparent 1px);
-  background-size: 72px 72px;
+/* ---------- accordion ---------- */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.acc-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.acc-inner {
+  overflow: hidden;
+  min-height: 0;
 }
 
-.text-stroke {
-  -webkit-text-stroke: 1px rgba(245,243,238,0.35);
-  color: transparent;
+/* ---------- forms ---------- */
+.field {
+  width: 100%;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 0.7rem;
+  background: var(--card);
+  color: var(--ink);
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
-.text-stroke-lime {
-  -webkit-text-stroke: 1px rgba(215,255,63,0.7);
-  color: transparent;
+.field::placeholder {
+  color: var(--faint);
+}
+.field:hover {
+  border-color: var(--ink-soft);
+}
+.field:focus {
+  outline: none;
+  border-color: var(--clay);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--clay) 22%, transparent);
+}
+.field[aria-invalid="true"] {
+  border-color: var(--clay);
+}
+.field-err {
+  color: var(--clay);
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
 }
 
-.mask-reveal { overflow: hidden; display: block; }
+/* ---------- living portrait — mini signature ---------- */
+.portrait-breathe {
+  animation: portrait-breathe 5.5s ease-in-out infinite;
+  transform-box: fill-box;
+}
+@keyframes portrait-breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+.portrait-pupils {
+  transition: transform 160ms ease-out;
+}
 
-:focus-visible {
-  outline: 2px solid #d7ff3f;
+.umbrella-enter {
+  animation: umbrella-in 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform-box: fill-box;
+}
+@keyframes umbrella-in {
+  from {
+    opacity: 0;
+    transform: translateY(34px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-identity {
+  /* Name is dominant; portrait rides directly to the right of "Rupsha Das."
+     inside .hero-name-row. This wrapper just contains the heading. */
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+}
+.hero-name {
+  min-width: 0;
+  max-width: 100%;
+  margin-top: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+/* Name + portrait share one wrapping row: side-by-side when they fit,
+   portrait drops below the name on very narrow phones. Inline-flex keeps
+   the portrait immediately after the name and vertically centered;
+   min/max-width + wrap guarantee no viewport overflow, no clipping. */
+.hero-name-row {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(0.6rem, 2vw, 1rem);
+  min-width: 0;
+  max-width: 100%;
+}
+.hero-name-text {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.hero-portrait {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  align-self: center;
+  min-width: 0;
+  /* 44px min on phones → 72px cap on large phones → up to 88px desktop.
+     Always visually smaller than the adjacent hero name. */
+  height: clamp(2.75rem, 13vw, 4.5rem);
+  aspect-ratio: 244 / 260;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+@media (min-width: 768px) {
+  .hero-portrait {
+    height: clamp(3rem, 7vw, 5.5rem);
+  }
+}
+.hero-portrait-fig {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.hero-portrait-btn {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 2px;
+  margin: -2px;
+  border-radius: 38% 38% 22% 22% / 30% 30% 18% 18%;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  /* subtle editorial frame, not a card */
   outline-offset: 4px;
-  border-radius: 2px;
+  transition: transform 180ms ease;
+}
+.hero-portrait-btn:hover {
+  transform: translateY(-1px);
+}
+.hero-portrait-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+.hero-portrait-btn:focus-visible {
+  outline: 2.5px solid var(--clay);
+  outline-offset: 4px;
+}
+.hero-portrait-svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 244 / 260;
+  border-radius: 38% 38% 22% 22% / 30% 30% 18% 18%;
+  background: var(--paper-2);
+  border: 1.5px solid var(--line-strong);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Portrait-local dialogue — the only place the character speaks.
+   Absolute overlay inside .portrait-wrapper, never shifts layout,
+   never positioned relative to the page, header, toggle, or viewport.
+   Mobile-first: portrait wraps below the name near the LEFT edge, so the
+   bubble anchors left:0 and grows rightward into open space. On wider
+   screens the portrait rides right of the name, so the bubble anchors
+   right:0 and grows leftward. Either way it stays in-viewport. */
+.portrait-wrapper {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+}
+.portrait-dialogue {
+  position: absolute;
+  inset: auto auto calc(100% + 10px) 0;
+  left: 0;
+  right: auto;
+  z-index: 10;
+  display: block;
+  width: max-content;
+  max-width: min(16rem, calc(100vw - 2rem));
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  text-align: center;
+  pointer-events: none;
+}
+@media (min-width: 640px) {
+  .portrait-dialogue {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+}
+.portrait-dialogue-bubble {
+  display: inline-block;
+  width: max-content;
+  max-width: min(16rem, calc(100vw - 2rem));
+  min-width: 0;
+  background: var(--card);
+  border: 1.5px solid var(--ink);
+  border-radius: 0.9rem;
+  border-bottom-left-radius: 0.25rem;
+  padding: 0.35rem 0.65rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  /* Reset h1 tracking: .t-hero sets letter-spacing in em, which inherits
+     as a fixed pixel value (-0.03em of a ~120px heading ≈ -3.6px). At the
+     bubble's 13px size that overlaps every glyph. Normal tracking here. */
+  letter-spacing: normal;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  text-align: center;
+  animation: mini-speech-pop 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Tail follows the anchor: bottom-left on mobile, bottom-right on desktop. */
+@media (min-width: 640px) {
+  .portrait-dialogue-bubble {
+    border-bottom-left-radius: 0.9rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+}
+@media (max-width: 380px) {
+  .portrait-dialogue,
+  .portrait-dialogue-bubble {
+    max-width: calc(100vw - 2rem);
+  }
+  .portrait-dialogue-bubble {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.55rem;
+  }
+}
+@keyframes mini-speech-pop {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- misc ---------- */
+.stamp {
+  font-family: var(--font-mono2);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.index-num {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+video,
+canvas {
+  height: auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 650;
+  transition: top 150ms ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* theme toggle sun/moon morph */
+.theme-icon {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+button:hover .theme-icon {
+  transform: rotate(24deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .noise::after { display: none; }
-}
-
-.marquee-track { will-change: transform; }
-
-.vertical-text { writing-mode: vertical-rl; }
-
-/* easter egg chaos mode */
-.chaos-mode {
-  animation: hueSpin 3s linear infinite;
-}
-@keyframes hueSpin {
-  to { filter: hue-rotate(360deg); }
+  .reveal {
+    opacity: 1;
+    translate: none;
+  }
 }

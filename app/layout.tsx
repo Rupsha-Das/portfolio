@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/ui/CustomCursor";
-import Navigation from "@/components/layout/Navigation";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   SITE_DESCRIPTION,
@@ -13,16 +13,24 @@ import {
   SITE_URL,
 } from "@/lib/site";
 
-const display = Space_Grotesk({
+const display = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "900"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 const body = Inter({
   variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  variable: "--font-mono2",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -33,13 +41,20 @@ export const metadata: Metadata = {
     template: `%s · ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
-  keywords: ["Rupsha Das", "Full-Stack Developer", "Next.js", "React", "Node.js", "TypeScript", "AI", "Portfolio"],
+  keywords: [
+    "Rupsha Das",
+    "Full-Stack Developer",
+    "Next.js",
+    "React",
+    "Node.js",
+    "TypeScript",
+    "AI",
+    "Portfolio",
+  ],
   authors: [{ name: "Rupsha Das", url: SITE_URL }],
   creator: "Rupsha Das",
   publisher: "Rupsha Das",
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
@@ -63,7 +78,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Rupsha Das — Full-Stack Developer. React · Next.js · Node.js · AI.",
+        alt: "Rupsha Das — Full-Stack Developer. Reliable software people enjoy using.",
       },
     ],
   },
@@ -74,34 +89,49 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon.ico", sizes: "any" }],
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
     apple: [{ url: "/apple-icon", sizes: "180x180", type: "image/png" }],
   },
   manifest: "/manifest.webmanifest",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08090d",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#14110c" },
+    { media: "(prefers-color-scheme: light)", color: "#faf6ed" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
 
+const THEME_INIT = `(function(){try{var s=localStorage.getItem("studio-theme");var t=s||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme="light";}document.documentElement.classList.remove("no-js");})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-void text-ink noise font-body">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:bg-lime focus:text-black focus:px-4 focus:py-2 focus:rounded-full focus:text-sm focus:font-semibold"
-        >
+    <html lang="en" className={`no-js ${display.variable} ${body.variable} ${mono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+      </head>
+      <body className="grain flex min-h-dvh flex-col bg-paper font-body text-ink antialiased">
+        <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <CustomCursor />
-        <Navigation />
-        <main id="main" className="flex-1 flex flex-col">
+        <SiteHeader />
+        <main id="main" className="flex-1">
           {children}
         </main>
+        <SiteFooter />
         <JsonLd />
+        <noscript>
+          <style>{`.reveal{opacity:1 !important;translate:none !important;}[data-menu-panel]{display:none !important;}.no-js-nav{display:flex !important;}`}</style>
+          <p className="wrap t-small py-4 text-inksoft">
+            JavaScript is off — everything readable still works. The contact form needs JavaScript;
+            email me directly instead.
+          </p>
+        </noscript>
       </body>
     </html>
   );
